@@ -3,7 +3,6 @@ package com.example.doordashproject
 import com.example.doordashproject.domain.Restaurant
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.TestScheduler
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.*
