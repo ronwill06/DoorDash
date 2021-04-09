@@ -20,6 +20,8 @@ import org.w3c.dom.Text
 import presentation.contracts.RestaurantDetailsPresentationContract
 import javax.inject.Inject
 
+const val RESTAURANT_ID = "RESTAURANT_ID"
+
 class RestaurantDetailsFragment : Fragment(), RestaurantDetailsPresentationContract.View {
 
     @Inject
@@ -42,7 +44,7 @@ class RestaurantDetailsFragment : Fragment(), RestaurantDetailsPresentationContr
         @JvmStatic
         fun newInstance(id: String) =
             RestaurantDetailsFragment().apply {
-                this.id = id
+                arguments = Bundle().apply { putString(RESTAURANT_ID, id) }
             }
     }
 
@@ -55,6 +57,7 @@ class RestaurantDetailsFragment : Fragment(), RestaurantDetailsPresentationContr
             .restaurantDetailsModule(RestaurantDetailsModule(this))
             .build()
             .inject(this)
+        id = arguments?.getString(RESTAURANT_ID)
         id?.let { presenter.fetchRestaurantDetails(it) }
     }
 
