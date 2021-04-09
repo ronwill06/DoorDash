@@ -3,6 +3,8 @@ package com.example.doordashproject.dagger
 import com.example.doordashproject.domain.contracts.RestaurantDomainContract
 import dagger.Module
 import dagger.Provides
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import presentation.RestaurantListPresenter
 import presentation.RestaurantListUseCase
 import presentation.contracts.RestaurantListPresentationContract
@@ -23,6 +25,6 @@ class RestaurantListModule(private val view: RestaurantListPresentationContract.
     @Singleton
     fun providesRestaurantListPresenter(useCase: RestaurantListPresentationContract.UseCase):
             RestaurantListPresentationContract.Presenter {
-        return RestaurantListPresenter(useCase, view)
+        return RestaurantListPresenter(useCase, view, Schedulers.io(), AndroidSchedulers.mainThread())
     }
 }

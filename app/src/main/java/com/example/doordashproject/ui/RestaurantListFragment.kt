@@ -69,6 +69,13 @@ class RestaurantListFragment : Fragment(), RestaurantListPresentationContract.Vi
         recyclerView.adapter = RestaurantListAdapter(restaurantList, this)
     }
 
+    override fun onRestaurantsListEmpty() {
+        progressBar.visibility = View.GONE
+        recyclerView.visibility = View.GONE
+        errorTextView.visibility = View.VISIBLE
+        errorTextView.text = getString(R.string.no_restaurants_available)
+    }
+
     override fun onError(error: Throwable) {
         progressBar.visibility = View.GONE
         recyclerView.visibility = View.GONE
