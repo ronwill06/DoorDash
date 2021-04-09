@@ -3,4 +3,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="restaurant_image">restaurant image</string>
     <string name="delivers">Delivers:</string>
+    <string name="no_restaurants_available">Sorry! There are no restaurants available in your area.</string>
 </resources>

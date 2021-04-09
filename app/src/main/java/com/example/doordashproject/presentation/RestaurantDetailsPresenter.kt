@@ -1,19 +1,19 @@
 package presentation
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Scheduler
 import presentation.contracts.RestaurantDetailsPresentationContract
 
 class RestaurantDetailsPresenter(
     private val useCase: RestaurantDetailsPresentationContract.UseCase,
-    private val view: RestaurantDetailsPresentationContract.View?
+    private val view: RestaurantDetailsPresentationContract.View?,
+    private val backgroundScheduler: Scheduler,
+    private val mainThreadScheduler: Scheduler
 ) : RestaurantDetailsPresentationContract.Presenter {
-    private val TAG = RestaurantDetailsPresentationContract::class.java.simpleName
 
     override fun fetchRestaurantDetails(id: String) {
         useCase.getRestaurantDetails(id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(backgroundScheduler)
+            .observeOn(mainThreadScheduler)
             .subscribe({ restaurantDetails ->
                 view?.onRestaurantFetched(restaurantDetails)
             }, {

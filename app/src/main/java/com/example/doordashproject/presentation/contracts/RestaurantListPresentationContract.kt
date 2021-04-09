@@ -12,6 +12,7 @@ interface RestaurantListPresentationContract {
     }
     interface View {
         fun onFetchedRestaurants(restaurantList: List<Restaurant>)
+        fun onRestaurantsListEmpty()
         fun onError(error: Throwable)
         fun onRowClicked(restaurant: Restaurant)
     }
